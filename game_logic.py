@@ -2,7 +2,7 @@ import random
 
 
 # Add 2 to a random cell after each turn
-def add_new_2(mat):
+def add_new_2(mat: list) -> None:
     r = random.randint(0, 3)
     c = random.randint(0, 3)
     # Finding a random cell with 0 inside
@@ -13,27 +13,23 @@ def add_new_2(mat):
 
 
 # Check current status: WON / PROCEED
-def get_current_state(mat):
+def get_current_state(mat: list) -> str:
     # WON condition
-    for i in range(4):
-        for j in range(4):
-            if mat[i][j] == 2048:
-                return 'WON'
+    for i in mat:
+        if 2048 in i:
+            return 'WON'
     # "Zero cell presence" condition
-    for i in range(4):
-        for j in range(4):
-            if mat[i][j] == 0:
-                return 'GAME NOT OVER'
+    for i in mat:
+        if 0 in i:
+            return 'GAME NOT OVER'
     # "Zero cell appearing after next turn" condition
     for i in range(3):
         for j in range(3):
             if mat[i][j] == mat[i + 1][j] or mat[i][j] == mat[i][j + 1]:
                 return 'GAME NOT OVER'
-    # TBD
     for j in range(3):
         if mat[3][j] == mat[3][j + 1]:
             return 'GAME NOT OVER'
-    # TBD
     for i in range(3):
         if mat[i][3] == mat[i + 1][3]:
             return 'GAME NOT OVER'
@@ -42,7 +38,7 @@ def get_current_state(mat):
 
 
 # Initialize the game matrix
-def start_game():
+def start_game() -> list:
     mat = []
     for i in range(4):
         mat.append([0] * 4)
@@ -54,7 +50,6 @@ def start_game():
     A / a - Move LEFT
     D / d - Move RIGHT
     """)
-
     add_new_2(mat)  # Add 2 to a random cell after each turn
     return mat
 
