@@ -14,7 +14,6 @@ while True:
     if x in 'Ww':
         mat, flag = a.move_up(mat)
         status = get_current_state(mat)
-        print(status)
         if status == 'GAME NOT OVER':
             add_new_2(mat)
         else:
@@ -23,7 +22,6 @@ while True:
     elif x in 'Ss':
         mat, flag = a.move_down(mat)
         status = get_current_state(mat)
-        print(status)
         if status == 'GAME NOT OVER':
             add_new_2(mat)
         else:
@@ -33,7 +31,6 @@ while True:
     elif x in 'Aa':
         mat, flag = a.move_left(mat)
         status = get_current_state(mat)
-        print(status)
         if status == 'GAME NOT OVER':
             add_new_2(mat)
         else:
@@ -42,7 +39,6 @@ while True:
     elif x in 'Dd':
         mat, flag = a.move_right(mat)
         status = get_current_state(mat)
-        print(status)
         if status == 'GAME NOT OVER':
             add_new_2(mat)
         else:

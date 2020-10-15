@@ -2,45 +2,45 @@ from game_logic import compress, merge_cells, reverse, transpose
 
 
 # Matrix update upon LEFT action (MAIN)
-def move_left(grid) -> [list, bool]:
+def move_left(matrix: list) -> [list, bool]:
     # Compress the grid
-    new_grid, changed_compress = compress(grid)
-    # Merge the cells.
-    new_grid, changed_merge = merge_cells(new_grid)
+    new_matrix, changed_compress = compress(matrix)
+    # Merge the cells
+    new_matrix, changed_merge = merge_cells(new_matrix)
     changed = changed_compress or changed_merge
     # Compress after merging
-    new_grid, temp = compress(new_grid)
-    return new_grid, changed
+    new_matrix, temp = compress(new_matrix)
+    return new_matrix, changed
 
 
 # Matrix update upon RIGHT action
-def move_right(grid) -> [list, bool]:
+def move_right(matrix: list) -> [list, bool]:
     # Reverse the matrix
-    new_grid = reverse(grid)
+    new_matrix = reverse(matrix)
     # Move left
-    new_grid, changed = move_left(new_grid)
+    new_matrix, changed = move_left(new_matrix)
     # Reverse the matrix
-    new_grid = reverse(new_grid)
-    return new_grid, changed
+    new_matrix = reverse(new_matrix)
+    return new_matrix, changed
 
 
 # Matrix update upon UP action
-def move_up(grid) -> [list, bool]:
+def move_up(matrix: list) -> [list, bool]:
     # Transpose the matrix
-    new_grid = transpose(grid)
+    new_matrix = transpose(matrix)
     # Move left
-    new_grid, changed = move_left(new_grid)
+    new_matrix, changed = move_left(new_matrix)
     # Transpose the matrix
-    new_grid = transpose(new_grid)
-    return new_grid, changed
+    new_matrix = transpose(new_matrix)
+    return new_matrix, changed
 
 
 # Matrix update upon DOWN action
-def move_down(grid) -> [list, bool]:
+def move_down(matrix: list) -> [list, bool]:
     # Transpose the matrix
-    new_grid = transpose(grid)
+    new_matrix = transpose(matrix)
     # Move right
-    new_grid, changed = move_right(new_grid)
+    new_matrix, changed = move_right(new_matrix)
     # Transpose the matrix
-    new_grid = transpose(new_grid)
-    return new_grid, changed
+    new_matrix = transpose(new_matrix)
+    return new_matrix, changed
