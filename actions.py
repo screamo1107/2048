@@ -4,10 +4,10 @@ from game_logic import compress, merge_cells, reverse, transpose
 # Matrix update upon LEFT action (MAIN)
 def move_left(grid) -> [list, bool]:
     # Compress the grid
-    new_grid, changed1 = compress(grid)
+    new_grid, changed_compress = compress(grid)
     # Merge the cells.
-    new_grid, changed2 = merge_cells(new_grid)
-    changed = changed1 or changed2
+    new_grid, changed_merge = merge_cells(new_grid)
+    changed = changed_compress or changed_merge
     # Compress after merging
     new_grid, temp = compress(new_grid)
     return new_grid, changed
