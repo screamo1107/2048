@@ -12,77 +12,60 @@ def add_new_2(mat):
     mat[r][c] = 2
 
 
+# Check current status: WON / PROCEED
+def get_current_state(mat):
+    # WON condition
+    for i in range(4):
+        for j in range(4):
+            if mat[i][j] == 2048:
+                return 'WON'
+    # "Zero cell presence" condition
+    for i in range(4):
+        for j in range(4):
+            if mat[i][j] == 0:
+                return 'GAME NOT OVER'
+    # "Zero cell appearing after next turn" condition
+    for i in range(3):
+        for j in range(3):
+            if mat[i][j] == mat[i + 1][j] or mat[i][j] == mat[i][j + 1]:
+                return 'GAME NOT OVER'
+    # TBD
+    for j in range(3):
+        if mat[3][j] == mat[3][j + 1]:
+            return 'GAME NOT OVER'
+    # TBD
+    for i in range(3):
+        if mat[i][3] == mat[i + 1][3]:
+            return 'GAME NOT OVER'
+
+    return 'LOST'
+
+
 # Initialize the game matrix
 def start_game():
     mat = []
     for i in range(4):
         mat.append([0] * 4)
     # Tip for the user
-    print("Commands are as follows : ")
-    print("'W' or 'w' : Move Up")
-    print("'S' or 's' : Move Down")
-    print("'A' or 'a' : Move Left")
-    print("'D' or 'd' : Move Right")
+    print("""
+    Commands:
+    W / w - Move UP
+    S / s - Move DOWN
+    A / a - Move LEFT
+    D / d - Move RIGHT
+    """)
 
     add_new_2(mat)  # Add 2 to a random cell after each turn
     return mat
 
 
-# function to get the current
-# state of game
-def get_current_state(mat):
-    # if any cell contains
-    # 2048 we have won
-    for i in range(4):
-        for j in range(4):
-            if (mat[i][j] == 2048):
-                return 'WON'
-
-    # if we are still left with
-    # atleast one empty cell
-    # game is not yet over
-    for i in range(4):
-        for j in range(4):
-            if (mat[i][j] == 0):
-                return 'GAME NOT OVER'
-
-    # or if no cell is empty now
-    # but if after any move left, right,
-    # up or down, if any two cells
-    # gets merged and create an empty
-    # cell then also game is not yet over
-    for i in range(3):
-        for j in range(3):
-            if (mat[i][j] == mat[i + 1][j] or mat[i][j] == mat[i][j + 1]):
-                return 'GAME NOT OVER'
-
-    for j in range(3):
-        if (mat[3][j] == mat[3][j + 1]):
-            return 'GAME NOT OVER'
-
-    for i in range(3):
-        if (mat[i][3] == mat[i + 1][3]):
-            return 'GAME NOT OVER'
-
-    # else we have lost the game
-    return 'LOST'
-
-
-# all the functions defined below
-# are for left swap initially.
-
-# function to compress the grid
-# after every step before and
-# after merging cells.
+# Compress the grid after every step before and after merging cells.
 def compress(mat):
-    # bool variable to determine
-    # any change happened or not
+    # Check for the changes
     changed = False
 
-    # empty grid
+    # Empty grid
     new_mat = []
-
-    # with all cells empty
     for i in range(4):
         new_mat.append([0] * 4)
 
