@@ -46,4 +46,5 @@ while True:
     else:
         print("Invalid Key Pressed")
 
-    print("\n".join([' '.join(str(a)) for a in mat]))
+    for row in mat:
+        print(*row)

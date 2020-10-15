@@ -2,7 +2,7 @@ import numpy as np
 import random
 
 
-# Add 2 to a random cell after each turn
+# Add 2 to a random zero-cell after each turn
 def add_new_2(mat: list) -> None:
     r = random.randint(0, 3)
     c = random.randint(0, 3)
@@ -40,9 +40,6 @@ def get_current_state(mat: list) -> str:
 
 # Initialize the game matrix
 def start_game() -> list:
-    mat = []
-    for i in range(4):
-        mat.append([0] * 4)
     # Tip for the user
     print("""
     Commands:
@@ -51,7 +48,8 @@ def start_game() -> list:
     A / a - Move LEFT
     D / d - Move RIGHT
     """)
-    add_new_2(mat)  # Add 2 to a random cell after each turn
+    mat = [[0]*4]*4
+    add_new_2(mat)  # Add 2 to a random cell
     return mat
 
 
