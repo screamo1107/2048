@@ -48,6 +48,10 @@ while is_zero_in_mas(mas):
                 mas = move_left(mas)
             elif event.key == pygame.K_RIGHT:
                 mas = move_right(mas)
+            elif event.key == pygame.K_UP:
+                mas = move_up(mas)
+            elif event.key == pygame.K_DOWN:
+                mas = move_down(mas)
 
             empty = get_empty_list(mas)
             random.shuffle(empty)

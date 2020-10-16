@@ -177,3 +177,123 @@ class Test2048(unittest.TestCase):
             [0, 2, 4, 16]
         ]
         self.assertEqual(move_right(mas), expected)
+
+    def test_move_up_1(self):
+        mas = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        expected = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        self.assertEqual(move_up(mas), expected)
+
+    def test_move_up_2(self):
+        mas = [
+            [2, 2, 0, 0],
+            [4, 0, 4, 0],
+            [8, 0, 0, 8],
+            [16, 2, 0, 16]
+        ]
+        expected = [
+            [2, 4, 4, 8],
+            [4, 0, 0, 16],
+            [8, 0, 0, 0],
+            [16, 0, 0, 0]
+        ]
+        self.assertEqual(move_up(mas), expected)
+
+    def test_move_up_3(self):
+        mas = [
+            [2, 2, 2, 0],
+            [2, 4, 8, 4],
+            [4, 0, 8, 4],
+            [4, 2, 2, 16]
+        ]
+        expected = [
+            [4, 2, 2, 8],
+            [8, 4, 16, 16],
+            [0, 2, 2, 0],
+            [0, 0, 0, 0]
+        ]
+        self.assertEqual(move_up(mas), expected)
+
+    def test_move_up_4(self):
+        mas = [
+            [0, 2, 4, 4],
+            [0, 2, 4, 4],
+            [0, 4, 4, 0],
+            [2, 0, 4, 16]
+        ]
+        expected = [
+            [2, 4, 8, 8],
+            [0, 4, 8, 16],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        self.assertEqual(move_up(mas), expected)
+
+    def test_move_down_1(self):
+        mas = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        expected = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        self.assertEqual(move_down(mas), expected)
+
+    def test_move_down_2(self):
+        mas = [
+            [2, 2, 0, 0],
+            [4, 0, 4, 0],
+            [8, 0, 0, 8],
+            [16, 2, 0, 16]
+        ]
+        expected = [
+            [2, 0, 0, 0],
+            [4, 0, 0, 0],
+            [8, 0, 0, 8],
+            [16, 4, 4, 16]
+        ]
+        self.assertEqual(move_down(mas), expected)
+
+    def test_move_down_3(self):
+        mas = [
+            [2, 2, 2, 0],
+            [2, 4, 8, 4],
+            [4, 0, 8, 4],
+            [4, 2, 2, 16]
+        ]
+        expected = [
+            [0, 0, 0, 0],
+            [0, 2, 2, 0],
+            [4, 4, 16, 8],
+            [8, 2, 2, 16]
+        ]
+        self.assertEqual(move_down(mas), expected)
+
+    def test_move_down_4(self):
+        mas = [
+            [0, 2, 4, 4],
+            [0, 2, 4, 4],
+            [0, 4, 4, 0],
+            [2, 0, 4, 16]
+        ]
+        expected = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 4, 8, 8],
+            [2, 4, 8, 16]
+        ]
+        self.assertEqual(move_down(mas), expected)
