@@ -37,7 +37,7 @@ def draw_interface():
 draw_interface()
 pygame.display.update()
 
-while is_zero_in_mas(mas):
+while is_zero_in_mas(mas) or can_move(mas):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()

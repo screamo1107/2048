@@ -297,3 +297,40 @@ class Test2048(unittest.TestCase):
             [2, 4, 8, 16]
         ]
         self.assertEqual(move_down(mas), expected)
+
+    def test_can_move_1(self):
+        mas = [
+            [4, 2, 4, 4],
+            [8, 0, 4, 4],
+            [2, 4, 4, 2],
+            [2, 8, 4, 16]
+        ]
+        self.assertEqual(can_move(mas), True)
+
+    def test_can_move_2(self):
+        mas = [
+            [4, 2, 4, 4],
+            [8, 16, 4, 4],
+            [2, 4, 4, 2],
+            [2, 8, 4, 16]
+        ]
+        self.assertEqual(can_move(mas), True)
+
+    @unittest.skip
+    def test_can_move_3(self):
+        mas = [
+            [4, 2, 32, 4],
+            [8, 16, 2, 4],
+            [16, 2, 4, 2],
+            [32, 8, 4, 2]
+        ]
+        self.assertEqual(can_move(mas), True)
+
+    def test_can_move_4(self):
+        mas = [
+            [4, 2, 32, 2],
+            [8, 16, 2, 4],
+            [16, 2, 8, 32],
+            [32, 8, 4, 16]
+        ]
+        self.assertEqual(can_move(mas), False)

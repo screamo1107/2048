@@ -99,3 +99,12 @@ def move_down(mas):
         for i in range(4):
             mas[i][j] = column[i]
     return mas
+
+
+def can_move(mas):
+    for i in range(3):
+        for j in range(3):
+            if mas[i][j] == mas[i][j+1] or mas[i][j] == mas[i+1][j]:
+                print(mas[i][j])
+                return True
+    return False
