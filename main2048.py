@@ -23,16 +23,24 @@ while is_zero_in_mas(mas):
             pygame.quit()
             sys.exit(0)
         elif event.type == pygame.KEYDOWN:
+            font = pygame.font.SysFont("arial", 65)
             pygame.draw.rect(screen, const.COLORS['HEADER'], const.TITLE_REC)
             for row in range(const.BLOCKS):
                 for column in range(const.BLOCKS):
+                    value = mas[row][column]
+                    text = font.render(str(value), True, const.COLORS['NUMBER'])
                     w = column * const.BLOCK_SIZE + (column + 1) * const.MARGIN
-                    h = row * const.BLOCK_SIZE + (row + 1) * const.MARGIN + 110
-                    pygame.draw.rect(screen, const.COLORS['CELL'], (w, h, 110, 110))
+                    h = row * const.BLOCK_SIZE + (row + 1) * const.MARGIN + const.BLOCK_SIZE
+                    pygame.draw.rect(screen, const.COLORS[str(value)], (w, h, const.BLOCK_SIZE, const.BLOCK_SIZE))
+                    if value != 0:
+                        font_w, font_h = text.get_size()
+                        text_x = w + (const.BLOCK_SIZE - font_w) / 2
+                        text_y = h + (const.BLOCK_SIZE - font_h) / 2
+                        screen.blit(text, (int(text_x), int(text_y)))
             empty = get_empty_list(mas)
             random.shuffle(empty)
             random_num = empty.pop()
             x, y = get_index_from_number(random_num)
             mas = insert_2(mas, x, y)
             pretty_print(mas)
-    pygame.display.update()
+            pygame.display.update()
