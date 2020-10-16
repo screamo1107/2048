@@ -43,13 +43,16 @@ while is_zero_in_mas(mas):
             pygame.quit()
             sys.exit(0)
         elif event.type == pygame.KEYDOWN:
+
             if event.key == pygame.K_LEFT:
                 mas = move_left(mas)
+            elif event.key == pygame.K_RIGHT:
+                mas = move_right(mas)
+
             empty = get_empty_list(mas)
             random.shuffle(empty)
             random_num = empty.pop()
             x, y = get_index_from_number(random_num)
             mas = insert_2(mas, x, y)
-            # pretty_print(mas)
             draw_interface()
             pygame.display.update()
