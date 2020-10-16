@@ -1,8 +1,6 @@
-import form.constants as const
+import constants as const
 import pygame
 import sys
-import time
-
 
 pygame.init()
 screen = pygame.display.set_mode((const.WIDTH, const.HEIGHT))

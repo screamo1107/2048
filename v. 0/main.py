@@ -1,6 +1,8 @@
-import actions as a
-from game_logic import add_new_2, get_current_state, start_game
-import form.constants as const
+from form import actions as a
+from form.game_logic import add_new_2, get_current_state, start_game
+import constants as const
+import pygame
+import sys
 
 
 if __name__ == '__main__':
@@ -10,7 +12,6 @@ if __name__ == '__main__':
 while True:
     # User input
     x = input("Press the command: ")
-
     # Moving UP?
     if x in 'Ww':
         mat, flag = a.move_up(mat)

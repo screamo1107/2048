@@ -1,4 +1,4 @@
-from game_logic import compress, merge_cells, reverse, transpose
+from form.game_logic import compress, merge_cells, reverse, transpose
 
 
 # Matrix update upon LEFT action (MAIN)
