@@ -3,7 +3,7 @@ import pygame
 
 COLORS = {
          "HEADER": (255, 255, 255),
-         'NUMBER': (0, 0, 0),
+         'DIGIT': (0, 0, 0),
          '0': (190, 190, 190),
          '2': (255, 255, 255),
          '4': (255, 255, 125),
@@ -19,8 +19,8 @@ COLORS = {
 }
 
 BLOCKS = 4
-BLOCK_SIZE = 110
-MARGIN = 10
+BLOCK_SIZE = 120
+MARGIN = 5
 WIDTH = BLOCKS * BLOCK_SIZE + (BLOCKS + 1) * MARGIN
 HEIGHT = WIDTH + BLOCK_SIZE
-TITLE_REC = pygame.Rect(0, 0, WIDTH, 110)
+TITLE_REC = pygame.Rect(0, 0, WIDTH, BLOCK_SIZE)

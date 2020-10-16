@@ -15,6 +15,18 @@ class Test2048(unittest.TestCase):
     def test_number_by_index_4(self):
         self.assertEqual(get_number_from_index(3, 0), 13)
 
+    def test_index_by_number_1(self):
+        self.assertEqual(get_index_from_number(1), (0, 0))
+
+    def test_index_by_number_2(self):
+        self.assertEqual(get_index_from_number(16), (3, 3))
+
+    def test_index_by_number_3(self):
+        self.assertEqual(get_index_from_number(4), (0, 3))
+
+    def test_index_by_number_4(self):
+        self.assertEqual(get_index_from_number(13), (3, 0))
+
     def test_empty_list_1(self):
         lst_given = [[2, 2, 2, 0], [0, 2, 0, 2], [0, 2, 0, 0], [2, 2, 2, 2]]
         lst_expected = [4, 5, 7, 9, 11, 12]
@@ -25,11 +37,15 @@ class Test2048(unittest.TestCase):
         lst_expected = [1, 7, 8, 9, 10, 11, 12, 16]
         self.assertEqual(get_empty_list(lst_given), lst_expected)
 
-    def test_index_by_number_1(self):
-        self.assertEqual(get_index_from_number(16), (3, 3))
+    def test_empty_list_3(self):
+        lst_given = [[2, 2, 2, 2], [2, 2, 2, 2], [2, 2, 2, 2], [2, 2, 2, 0]]
+        lst_expected = [16]
+        self.assertEqual(get_empty_list(lst_given), lst_expected)
 
-    def test_index_by_number_2(self):
-        self.assertEqual(get_index_from_number(1), (0, 0))
+    def test_empty_list_4(self):
+        lst_given = [[2, 2, 2, 2], [2, 2, 2, 2], [2, 2, 2, 2], [2, 2, 2, 2]]
+        lst_expected = []
+        self.assertEqual(get_empty_list(lst_given), lst_expected)
 
     def test_is_zero_in_mas_1(self):
         mas = [
@@ -50,6 +66,15 @@ class Test2048(unittest.TestCase):
         self.assertEqual(is_zero_in_mas(mas), True)
 
     def test_is_zero_in_mas_3(self):
+        mas = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        self.assertEqual(is_zero_in_mas(mas), True)
+
+    def test_is_zero_in_mas_4(self):
         mas = [
             [2, 2, 2, 2],
             [2, 2, 2, 2],
@@ -327,6 +352,15 @@ class Test2048(unittest.TestCase):
         self.assertEqual(can_move(mas), True)
 
     def test_can_move_4(self):
+        mas = [
+            [4, 2, 32, 2],
+            [8, 16, 2, 4],
+            [2, 2, 4, 2],
+            [32, 8, 2, 2]
+        ]
+        self.assertEqual(can_move(mas), True)
+
+    def test_can_move_5(self):
         mas = [
             [4, 2, 32, 2],
             [8, 16, 2, 4],

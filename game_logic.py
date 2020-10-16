@@ -114,7 +114,6 @@ def can_move(mas: list) -> bool:
     for i in range(3):
         for j in range(3):
             if mas[i][j] == mas[i][j+1] or mas[i][j] == mas[i+1][j]:
-                print(mas[i][j])
                 return True
     return False
 
