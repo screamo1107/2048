@@ -57,3 +57,63 @@ class Test2048(unittest.TestCase):
             [2, 2, 2, 2]
         ]
         self.assertEqual(is_zero_in_mas(mas), False)
+
+    def test_move_left_1(self):
+        mas = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        expected = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        self.assertEqual(move_left(mas), expected)
+
+    def test_move_left_2(self):
+        mas = [
+            [2, 2, 0, 0],
+            [4, 0, 4, 0],
+            [8, 0, 0, 8],
+            [16, 2, 0, 16]
+        ]
+        expected = [
+            [4, 0, 0, 0],
+            [8, 0, 0, 0],
+            [16, 0, 0, 0],
+            [16, 2, 16, 0]
+        ]
+        self.assertEqual(move_left(mas), expected)
+
+    def test_move_left_3(self):
+        mas = [
+            [0, 2, 2, 0],
+            [0, 0, 4, 4],
+            [8, 0, 8, 8],
+            [0, 2, 16, 16]
+        ]
+        expected = [
+            [4, 0, 0, 0],
+            [8, 0, 0, 0],
+            [16, 8, 0, 0],
+            [2, 32, 0, 0]
+        ]
+        self.assertEqual(move_left(mas), expected)
+
+    def test_move_left_4(self):
+        mas = [
+            [4, 2, 2, 4],
+            [2, 2, 4, 4],
+            [2, 4, 8, 32],
+            [0, 2, 4, 16]
+        ]
+        expected = [
+            [4, 4, 4, 0],
+            [4, 8, 0, 0],
+            [2, 4, 8, 32],
+            [2, 4, 16, 0]
+        ]
+        self.assertEqual(move_left(mas), expected)

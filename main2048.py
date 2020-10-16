@@ -43,6 +43,8 @@ while is_zero_in_mas(mas):
             pygame.quit()
             sys.exit(0)
         elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                mas = move_left(mas)
             empty = get_empty_list(mas)
             random.shuffle(empty)
             random_num = empty.pop()

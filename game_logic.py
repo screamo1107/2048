@@ -33,3 +33,18 @@ def is_zero_in_mas(mas):
         if 0 in row:
             return True
     return False
+
+
+def move_left(mas):
+    for row in mas:
+        while 0 in row:
+            row.remove(0)
+        while len(row) != 4:
+            row.append(0)
+    for i in range(4):
+        for j in range(3):
+            if mas[i][j] == mas[i][j+1] and mas[i][j] != 0:
+                mas[i][j] *= 2
+                mas[i].pop(j+1)
+                mas[i].append(0)
+    return mas
