@@ -1,7 +1,7 @@
 # MOVE ACTIONS:
 
 # Matrix update upon LEFT key pressed
-def move_left(mas):
+def move_left(mas: list) -> list:
     for row in mas:
         while 0 in row:
             row.remove(0)
@@ -17,7 +17,7 @@ def move_left(mas):
 
 
 # Matrix update upon RIGHT key pressed
-def move_right(mas):
+def move_right(mas: list) -> list:
     for row in mas:
         while 0 in row:
             row.remove(0)
@@ -33,7 +33,7 @@ def move_right(mas):
 
 
 # Matrix update upon UP key pressed
-def move_up(mas):
+def move_up(mas: list) -> list:
     for j in range(4):
         column = []
         for i in range(4):
@@ -52,7 +52,7 @@ def move_up(mas):
 
 
 # Matrix update upon DOWN key pressed
-def move_down(mas):
+def move_down(mas: list) -> list:
     for j in range(4):
         column = []
         for i in range(4):
@@ -84,25 +84,25 @@ def get_empty_list(mas: list) -> list:
 
 
 # Get cell number by provided index [i][j]
-def get_number_from_index(i, j):
+def get_number_from_index(i: int, j: int) -> int:
     return i * 4 + j + 1
 
 
 # Get the index [i][j] by cell number
-def get_index_from_number(number):
+def get_index_from_number(number: int) -> [int, int]:
     number -= 1
     x, y = number // 4, number % 4
     return x, y
 
 
 # Add '2' to selected cell
-def insert_2(mas, x, y):
+def insert_2(mas: list, x: int, y: int) -> list:
     mas[x][y] = 2
     return mas
 
 
 # Print the matrix in 2-d array view
-def pretty_print(mas):
+def pretty_print(mas: list):
     for row in mas:
         print(*row)
 
@@ -110,7 +110,7 @@ def pretty_print(mas):
 # CHECK THE STATE:
 
 # Check if possible to move when no empty cells
-def can_move(mas):
+def can_move(mas: list) -> bool:
     for i in range(3):
         for j in range(3):
             if mas[i][j] == mas[i][j+1] or mas[i][j] == mas[i+1][j]:
@@ -120,7 +120,7 @@ def can_move(mas):
 
 
 # Check if zeros presented in the matrix
-def is_zero_in_mas(mas):
+def is_zero_in_mas(mas: list) -> bool:
     for row in mas:
         if 0 in row:
             return True
