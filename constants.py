@@ -1,30 +1,33 @@
 import pygame
 
 
+BLOCKS = 4
+BLOCK_SIZE = 120
+DIGIT_SIZE = 65
+MARGIN = 5
+
+WIDTH = BLOCKS * BLOCK_SIZE + (BLOCKS + 1) * MARGIN
+HEIGHT = WIDTH + BLOCK_SIZE
+TITLE_REC = pygame.Rect(0, 0, WIDTH, BLOCK_SIZE)
+
+
+DIGIT_FONT = "arial"
+HEADER_TEXT = "Let's play 2048!"
+
+
 COLORS = {
          "HEADER": (255, 255, 255),
          'DIGIT': (0, 0, 0),
          '0': (190, 190, 190),
          '2': (255, 255, 255),
-         '4': (255, 255, 125),
+         '4': (255, 255, 135),
          '8': (255, 255, 65),
-         '16': (255, 255, 30),
-         '32': (255, 255, 0),
-         '64': (255, 200, 80),
-         '128': (255, 190, 30),
-         '256': (255, 190, 0),
-         '512': (255, 150, 40),
-         '1024': (255, 120, 0),
-         '2048': (255, 80, 0)
+         '16': (255, 255, 20),
+         '32': (255, 240, 0),
+         '64': (255, 190, 70),
+         '128': (255, 190, 10),
+         '256': (255, 160, 0),
+         '512': (255, 150, 10),
+         '1024': (255, 110, 0),
+         '2048': (255, 30, 0)
 }
-
-BLOCKS = 4
-BLOCK_SIZE = 120
-MARGIN = 5
-WIDTH = BLOCKS * BLOCK_SIZE + (BLOCKS + 1) * MARGIN
-HEIGHT = WIDTH + BLOCK_SIZE
-TITLE_REC = pygame.Rect(0, 0, WIDTH, BLOCK_SIZE)
-
-HEADER_TEXT = "Let's play 2048!"
-DIGIT_FONT = "arial"
-DIGIT_SIZE = 65
