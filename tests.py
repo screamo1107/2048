@@ -361,17 +361,17 @@ class Test2048(unittest.TestCase):
 
     def test_can_move_5(self):
         mas = [
-            [4, 2, 32, 2],
+            [4, 2, 32, 4],
             [8, 16, 2, 4],
-            [16, 2, 8, 32],
-            [32, 8, 4, 16]
+            [16, 2, 4, 8],
+            [32, 8, 4, 2]
         ]
-        self.assertEqual(can_move(mas), False)
+        self.assertEqual(can_move(mas), True)
 
     def test_can_move_6(self):
         mas = [
             [4, 2, 32, 4],
-            [8, 16, 2, 4],
+            [8, 16, 2, 8],
             [16, 2, 4, 8],
             [32, 8, 4, 2]
         ]
@@ -380,8 +380,26 @@ class Test2048(unittest.TestCase):
     def test_can_move_7(self):
         mas = [
             [4, 2, 32, 4],
-            [8, 16, 2, 8],
-            [16, 2, 4, 8],
-            [32, 8, 4, 2]
+            [8, 16, 2, 16],
+            [16, 2, 16, 8],
+            [32, 8, 4, 4]
         ]
         self.assertEqual(can_move(mas), True)
+
+    def test_can_move_8(self):
+        mas = [
+            [4, 2, 32, 4],
+            [8, 16, 2, 16],
+            [16, 2, 16, 8],
+            [32, 4, 4, 2]
+        ]
+        self.assertEqual(can_move(mas), True)
+
+    def test_can_move_9(self):
+        mas = [
+            [4, 2, 32, 2],
+            [8, 16, 2, 4],
+            [16, 2, 8, 32],
+            [32, 8, 4, 16]
+        ]
+        self.assertEqual(can_move(mas), False)

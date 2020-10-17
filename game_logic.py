@@ -116,10 +116,10 @@ def can_move(mas: list) -> bool:
         for j in range(3):
             if mas[i][j] == mas[i][j+1] or mas[i][j] == mas[i+1][j]:
                 state = True
-    # Additional check for UP/DOWN move in the last column
+    # Additional check for the moves within the last column and the last row
     j = 3
     for i in range(3):
-        if mas[i][j] == mas[i+1][j]:
+        if mas[i][j] == mas[i+1][j] or mas[j][i] == mas[j][i+1]:
             state = True
     return state
 
