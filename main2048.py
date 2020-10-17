@@ -16,11 +16,11 @@ mas = [
 # Game-board initialize
 pygame.init()
 screen = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
-pygame.display.set_caption("Let's play 2048!")
+pygame.display.set_caption(c.HEADER_TEXT)
 
 
 def draw_interface():
-    font = pygame.font.SysFont("arial", 65)
+    font = pygame.font.SysFont(c.DIGIT_FONT, c.DIGIT_SIZE)
     pygame.draw.rect(screen, c.COLORS['HEADER'], c.TITLE_REC)
     for row in range(c.BLOCKS):
         for column in range(c.BLOCKS):
