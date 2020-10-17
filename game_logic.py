@@ -111,11 +111,17 @@ def pretty_print(mas: list):
 
 # Check if possible to move when no empty cells
 def can_move(mas: list) -> bool:
+    state = False
     for i in range(3):
         for j in range(3):
             if mas[i][j] == mas[i][j+1] or mas[i][j] == mas[i+1][j]:
-                return True
-    return False
+                state = True
+    # Additional check for UP/DOWN move in the last column
+    j = 3
+    for i in range(3):
+        if mas[i][j] == mas[i+1][j]:
+            state = True
+    return state
 
 
 # Check if zeros presented in the matrix
