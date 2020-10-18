@@ -71,7 +71,7 @@ def draw_interface(score: int, delta: int = 0):
 
 
 def draw_intro_screen():
-    start_img = pygame.image.load('bg.png')
+    # start_img = pygame.image.load('bg.png')
     font_intro = pygame.font.SysFont(c.INTRO_FONT, c.INTRO_SIZE)
     text_intro = font_intro.render("WELCOME!", True, c.COLORS['WHITE'])
 
@@ -104,12 +104,37 @@ def draw_intro_screen():
         text_name = font_intro.render(name_input, True, c.COLORS['WHITE'])
         rect_name = text_name.get_rect()
         rect_name.center = screen.get_rect().center
-        screen.blit(pygame.transform.scale(start_img, [200, 200]), [10, 10])
+        # screen.blit(pygame.transform.scale(start_img, [200, 200]), [10, 10])
         screen.blit(text_intro, (110, 230))
         screen.blit(text_name, rect_name)
         pygame.display.update()
     screen.fill(c.COLORS['BLACK'])
 
+
+def draw_game_over():
+    font_end = pygame.font.SysFont(c.END_FONT, c.END_SIZE)
+    text_end = font_end.render("GAME OVER.", True, c.COLORS['WHITE'])
+    text_score = font_end.render(f"Your score: {score}", True, c.COLORS['WHITE'])
+    best_score = GAMERS_DATA[0][1]
+    if score > best_score:
+        text_b = "New record!"
+    else:
+        text_b = f"Best: {best_score}"
+    text_best = font_end.render(text_b, True, c.COLORS['WHITE'])
+    while True:
+        for event in pygame.event.get():
+            # Close action handling
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
+        screen.fill(c.COLORS['BLACK'])
+        screen.blit(text_end, (85, 230))
+        screen.blit(text_score, (50, 300))
+        screen.blit(text_best, (110, 370))
+        pygame.display.update()
+
+
+# GAME SEQUENCE:
 
 # Draw intro screen firstly
 draw_intro_screen()
@@ -118,7 +143,6 @@ draw_intro_screen()
 score = 0
 draw_interface(score)
 pygame.display.update()
-
 
 # Main game-cycle
 while is_zero_in_mas(mas) or can_move(mas):
@@ -142,12 +166,16 @@ while is_zero_in_mas(mas) or can_move(mas):
             score += delta
 
             # Actions once key is pressed
-            zeros = get_empty_list(mas)
-            random.shuffle(zeros)
-            random_zero_number = zeros.pop()
-            x, y = get_index_from_number(random_zero_number)
-            mas = insert_2(mas, x, y)
+            if is_zero_in_mas(mas):
+                zeros = get_empty_list(mas)
+                random.shuffle(zeros)
+                random_zero_number = zeros.pop()
+                x, y = get_index_from_number(random_zero_number)
+                mas = insert_2(mas, x, y)
 
             # Re-drawing of the updated game-board
             draw_interface(score, delta)
             pygame.display.update()
+
+# Display game-over screen once the main loop is finished
+draw_game_over()
