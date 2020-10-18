@@ -5,6 +5,7 @@ BLOCKS = 4
 BLOCK_SIZE = 120
 DIGIT_SIZE = 65
 MARGIN = 5
+SCORE_SIZE = 45
 
 WIDTH = BLOCKS * BLOCK_SIZE + (BLOCKS + 1) * MARGIN
 HEIGHT = WIDTH + BLOCK_SIZE
@@ -13,11 +14,13 @@ TITLE_REC = pygame.Rect(0, 0, WIDTH, BLOCK_SIZE)
 
 DIGIT_FONT = "arial"
 HEADER_TEXT = "Let's play 2048!"
+SCORE_FONT = "simsun"
 
 
 COLORS = {
          "HEADER": (255, 255, 255),
          'DIGIT': (0, 0, 0),
+         'SCORE': (150, 120, 100),
          '0': (190, 190, 190),
          '2': (255, 255, 255),
          '4': (255, 255, 135),

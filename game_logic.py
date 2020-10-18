@@ -1,7 +1,8 @@
 # MOVE ACTIONS:
 
 # Matrix update upon LEFT key pressed
-def move_left(mas: list) -> list:
+def move_left(mas: list) -> [list, int]:
+    delta = 0
     for row in mas:
         while 0 in row:
             row.remove(0)
@@ -11,9 +12,10 @@ def move_left(mas: list) -> list:
         for j in range(3):
             if mas[i][j] == mas[i][j+1] and mas[i][j] != 0:
                 mas[i][j] *= 2
+                delta += mas[i][j]
                 mas[i].pop(j+1)
                 mas[i].append(0)
-    return mas
+    return mas, delta
 
 
 # Matrix update upon RIGHT key pressed

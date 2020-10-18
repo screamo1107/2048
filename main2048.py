@@ -19,13 +19,18 @@ screen = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
 pygame.display.set_caption(c.HEADER_TEXT)
 
 
-def draw_interface():
-    font = pygame.font.SysFont(c.DIGIT_FONT, c.DIGIT_SIZE)
+def draw_interface(score):
+    font_digit = pygame.font.SysFont(c.DIGIT_FONT, c.DIGIT_SIZE)
+    font_score = pygame.font.SysFont(c.SCORE_FONT, c.SCORE_SIZE)
+    text_score = font_score.render("Your score: ", True, c.COLORS['SCORE'])
+    score_value = font_score.render(f"{score}", True, c.COLORS['SCORE'])
     pygame.draw.rect(screen, c.COLORS['HEADER'], c.TITLE_REC)
+    screen.blit(text_score, (20, 35))
+    screen.blit(score_value, (220, 35))
     for row in range(c.BLOCKS):
         for column in range(c.BLOCKS):
             value = mas[row][column]
-            text = font.render(str(value), True, c.COLORS['DIGIT'])
+            text = font_digit.render(str(value), True, c.COLORS['DIGIT'])
             w = column * c.BLOCK_SIZE + (column + 1) * c.MARGIN
             h = row * c.BLOCK_SIZE + (row + 1) * c.MARGIN + c.BLOCK_SIZE
             pygame.draw.rect(screen, c.COLORS[str(value)], (w, h, c.BLOCK_SIZE, c.BLOCK_SIZE))
@@ -38,7 +43,7 @@ def draw_interface():
 
 
 # Draw initial game-board
-draw_interface()
+draw_interface(0)
 pygame.display.update()
 
 
@@ -69,5 +74,5 @@ while is_zero_in_mas(mas) or can_move(mas):
             mas = insert_2(mas, x, y)
 
             # Re-drawing of the updated game-board
-            draw_interface()
+            draw_interface(score)
             pygame.display.update()

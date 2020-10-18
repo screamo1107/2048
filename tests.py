@@ -96,7 +96,7 @@ class Test2048(unittest.TestCase):
             [0, 0, 0, 0],
             [0, 0, 0, 0]
         ]
-        self.assertEqual(move_left(mas), expected)
+        self.assertEqual(move_left(mas), (expected, 0))
 
     def test_move_left_2(self):
         mas = [
@@ -111,7 +111,7 @@ class Test2048(unittest.TestCase):
             [16, 0, 0, 0],
             [16, 2, 16, 0]
         ]
-        self.assertEqual(move_left(mas), expected)
+        self.assertEqual(move_left(mas), (expected, 28))
 
     def test_move_left_3(self):
         mas = [
@@ -126,7 +126,7 @@ class Test2048(unittest.TestCase):
             [16, 8, 0, 0],
             [2, 32, 0, 0]
         ]
-        self.assertEqual(move_left(mas), expected)
+        self.assertEqual(move_left(mas), (expected, 60))
 
     def test_move_left_4(self):
         mas = [
@@ -141,7 +141,7 @@ class Test2048(unittest.TestCase):
             [2, 4, 8, 32],
             [2, 4, 16, 0]
         ]
-        self.assertEqual(move_left(mas), expected)
+        self.assertEqual(move_left(mas), (expected, 16))
 
     def test_move_right_1(self):
         mas = [
