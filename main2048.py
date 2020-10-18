@@ -14,6 +14,7 @@ mas = [
         [0, 0, 0, 0]
       ]
 
+USERNAME = None
 GAMERS_DATA = get_best_results()
 
 
@@ -68,14 +69,52 @@ def draw_interface(score, delta=0):
                 screen.blit(text, (int(text_x), int(text_y)))
 
 
+def draw_intro_screen():
+    start_img = pygame.image.load('bg.png')
+    font_intro = pygame.font.SysFont(c.SCORE_FONT, c.SCORE_SIZE)
+    text_intro = font_intro.render("WELCOME!", True, c.COLORS['SCORE'])
+
+    name_input = 'Enter your name!'
+    is_name_found = False
+    while not is_name_found:
+        for event in pygame.event.get():
+            # Close action handling
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
+            elif event.type == pygame.KEYDOWN:
+                if event.unicode.isalpha():
+                    if name_input == "Enter your name!":
+                        name_input = event.unicode
+                    else:
+                        name_input += event.unicode
+                elif event.key == pygame.K_BACKSPACE:
+                    name_input = name_input[:-1]
+                elif event.key == pygame.K_RETURN:
+                    if len(name_input) > 2:
+                        global USERNAME
+                        USERNAME = name_input
+                        is_name_found = True
+                        break
+
+        screen.fill(c.COLORS['DIGIT'])
+
+        text_name = font_intro.render(name_input, True, c.COLORS['SCORE'])
+        rect_name = text_name.get_rect()
+        rect_name.center = screen.get_rect().center
+        screen.blit(pygame.transform.scale(start_img, [200, 200]), [10, 10])
+        screen.blit(text_intro, (200, 230))
+        screen.blit(text_name, rect_name)
+        pygame.display.update()
+    screen.fill(c.COLORS['DIGIT'])
+
+
+draw_intro_screen()
+
 # Draw initial game-board
 score = 0
 draw_interface(score)
 pygame.display.update()
-
-
-def draw_intro_screen():
-    pass
 
 
 # Main game-cycle
