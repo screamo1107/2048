@@ -49,7 +49,7 @@ def move_up(mas: list) -> [list, int]:
         for i in range(3):
             if column[i] == column[i+1] and column[i] != 0:
                 column[i] *= 2
-                delta += mas[i][j]
+                delta += column[i]
                 column.pop(i+1)
                 column.append(0)
         for i in range(4):
@@ -70,7 +70,7 @@ def move_down(mas: list) -> [list, int]:
         for i in range(3, 0, -1):
             if column[i] == column[i-1] and column[i] != 0:
                 column[i] *= 2
-                delta += mas[i][j]
+                delta += column[i]
                 column.pop(i-1)
                 column.insert(0, 0)
         for i in range(4):
