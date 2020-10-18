@@ -3,7 +3,7 @@ import pygame
 import random
 import sys
 from game_logic import *
-from leaderboard import crsr, get_best_results
+from db_leaderboard import crsr, get_best_results, insert_result
 
 
 # Initial matrix
@@ -15,7 +15,7 @@ mas = [
       ]
 
 GAMERS_DATA = get_best_results()
-USERNAME = None
+USERNAME = ''
 
 
 # Game-board initialize
@@ -28,12 +28,12 @@ def draw_best_results():
     font_best_header = pygame.font.SysFont(c.SCORE_FONT, c.BEST_HEADER_SIZE)
     text_best_header = font_best_header.render("Best results: ", True, c.COLORS['BLACK'])
     font_best_player = pygame.font.SysFont(c.SCORE_FONT, c.BEST_PLAYERS_SIZE)
-    screen.blit(text_best_header, (330, 5))
+    screen.blit(text_best_header, (310, 5))
     for index, player in enumerate(GAMERS_DATA):
         name, pl_score = player
         r = f"{index+1}. {name} - {pl_score}"
         text_best_player = font_best_player.render(r, True, c.COLORS['BLACK'])
-        screen.blit(text_best_player, (330, 35 + 25 * index))
+        screen.blit(text_best_player, (310, 35 + 25 * index))
 
 
 def draw_interface(score: int, delta: int = 0):
@@ -121,6 +121,7 @@ def draw_game_over():
     else:
         text_b = f"Best: {best_score}"
     text_best = font_end.render(text_b, True, c.COLORS['WHITE'])
+    insert_result(USERNAME, score)
     while True:
         for event in pygame.event.get():
             # Close action handling
