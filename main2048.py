@@ -19,14 +19,18 @@ screen = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
 pygame.display.set_caption(c.HEADER_TEXT)
 
 
-def draw_interface(score):
+def draw_interface(score, delta=0):
     font_digit = pygame.font.SysFont(c.DIGIT_FONT, c.DIGIT_SIZE)
     font_score = pygame.font.SysFont(c.SCORE_FONT, c.SCORE_SIZE)
+    font_delta = pygame.font.SysFont(c.SCORE_FONT, c.DELTA_SIZE)
     text_score = font_score.render("Your score: ", True, c.COLORS['SCORE'])
     score_value = font_score.render(f"{score}", True, c.COLORS['SCORE'])
     pygame.draw.rect(screen, c.COLORS['HEADER'], c.TITLE_REC)
     screen.blit(text_score, (20, 35))
     screen.blit(score_value, (220, 35))
+    if delta > 0:
+        delta_value = font_delta.render(f"+{delta}!", True, c.COLORS['SCORE'])
+        screen.blit(delta_value, (222, 70))
     for row in range(c.BLOCKS):
         for column in range(c.BLOCKS):
             value = mas[row][column]
@@ -76,5 +80,5 @@ while is_zero_in_mas(mas) or can_move(mas):
             mas = insert_2(mas, x, y)
 
             # Re-drawing of the updated game-board
-            draw_interface(score)
+            draw_interface(score, delta)
             pygame.display.update()
