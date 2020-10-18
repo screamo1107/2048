@@ -43,7 +43,8 @@ def draw_interface(score):
 
 
 # Draw initial game-board
-draw_interface(0)
+score = 0
+draw_interface(score)
 pygame.display.update()
 
 
@@ -55,16 +56,17 @@ while is_zero_in_mas(mas) or can_move(mas):
             pygame.quit()
             sys.exit(0)
         elif event.type == pygame.KEYDOWN:
-
+            delta = 0
             # Keys handling
             if event.key == pygame.K_LEFT:
-                mas = move_left(mas)
+                mas, delta = move_left(mas)
             elif event.key == pygame.K_RIGHT:
-                mas = move_right(mas)
+                mas, delta = move_right(mas)
             elif event.key == pygame.K_UP:
-                mas = move_up(mas)
+                mas, delta = move_up(mas)
             elif event.key == pygame.K_DOWN:
-                mas = move_down(mas)
+                mas, delta = move_down(mas)
+            score += delta
 
             # Actions once key is pressed
             zeros = get_empty_list(mas)

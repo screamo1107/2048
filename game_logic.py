@@ -19,7 +19,8 @@ def move_left(mas: list) -> [list, int]:
 
 
 # Matrix update upon RIGHT key pressed
-def move_right(mas: list) -> list:
+def move_right(mas: list) -> [list, int]:
+    delta = 0
     for row in mas:
         while 0 in row:
             row.remove(0)
@@ -29,13 +30,15 @@ def move_right(mas: list) -> list:
         for j in range(3, 0, -1):
             if mas[i][j] == mas[i][j-1] and mas[i][j] != 0:
                 mas[i][j] *= 2
+                delta += mas[i][j]
                 mas[i].pop(j-1)
                 mas[i].insert(0, 0)
-    return mas
+    return mas, delta
 
 
 # Matrix update upon UP key pressed
-def move_up(mas: list) -> list:
+def move_up(mas: list) -> [list, int]:
+    delta = 0
     for j in range(4):
         column = []
         for i in range(4):
@@ -46,15 +49,17 @@ def move_up(mas: list) -> list:
         for i in range(3):
             if column[i] == column[i+1] and column[i] != 0:
                 column[i] *= 2
+                delta += mas[i][j]
                 column.pop(i+1)
                 column.append(0)
         for i in range(4):
             mas[i][j] = column[i]
-    return mas
+    return mas, delta
 
 
 # Matrix update upon DOWN key pressed
-def move_down(mas: list) -> list:
+def move_down(mas: list) -> [list, int]:
+    delta = 0
     for j in range(4):
         column = []
         for i in range(4):
@@ -65,11 +70,12 @@ def move_down(mas: list) -> list:
         for i in range(3, 0, -1):
             if column[i] == column[i-1] and column[i] != 0:
                 column[i] *= 2
+                delta += mas[i][j]
                 column.pop(i-1)
                 column.insert(0, 0)
         for i in range(4):
             mas[i][j] = column[i]
-    return mas
+    return mas, delta
 
 
 # SUPPLEMENT ACTIONS
