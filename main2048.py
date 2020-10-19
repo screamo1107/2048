@@ -3,7 +3,7 @@ import pygame
 import random
 import sys
 from game_logic import *
-from db_leaderboard import crsr, get_best_results, insert_result
+from db_leaderboard import get_best_results, insert_result
 
 
 # Initial matrix
@@ -16,6 +16,7 @@ mas = [
 
 GAMERS_DATA = get_best_results()
 USERNAME = ''
+score = 0
 
 
 # Game-board initialize
@@ -36,11 +37,11 @@ def draw_best_results():
         screen.blit(text_best_player, (310, 35 + 25 * index))
 
 
-def draw_interface(score: int, delta: int = 0):
+def draw_interface(score_display: int, delta: int = 0):
     font_digit = pygame.font.SysFont(c.DIGIT_FONT, c.DIGIT_SIZE)
     font_score = pygame.font.SysFont(c.SCORE_FONT, c.SCORE_SIZE)
     text_score = font_score.render("Your score: ", True, c.COLORS['BLACK'])
-    score_value = font_score.render(f"{score}", True, c.COLORS['SCORE_VALUE'])
+    score_value = font_score.render(f"{score_display}", True, c.COLORS['SCORE_VALUE'])
     font_delta = pygame.font.SysFont(c.SCORE_FONT, c.DELTA_SIZE)
 
     # Drawing header with score text and value
@@ -138,48 +139,52 @@ def draw_game_over():
         pygame.display.update()
 
 
+def game_sequence():
+    global score, mas
+
+    # Draw initial game-board once intro is passed
+    draw_interface(score)
+    pygame.display.update()
+
+    # Main game-cycle
+    while is_zero_in_mas(mas) or can_move(mas):
+        for event in pygame.event.get():
+            # Close action handling
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
+            elif event.type == pygame.KEYDOWN:
+                delta = 0
+
+                # Keys handling
+                if event.key == pygame.K_LEFT:
+                    mas, delta = move_left(mas)
+                elif event.key == pygame.K_RIGHT:
+                    mas, delta = move_right(mas)
+                elif event.key == pygame.K_UP:
+                    mas, delta = move_up(mas)
+                elif event.key == pygame.K_DOWN:
+                    mas, delta = move_down(mas)
+                score += delta
+
+                # Actions once key is pressed
+                if is_zero_in_mas(mas):
+                    zeros = get_empty_list(mas)
+                    random.shuffle(zeros)
+                    random_zero_number = zeros.pop()
+                    x, y = get_index_from_number(random_zero_number)
+                    mas = insert_2(mas, x, y)
+
+                # Re-drawing of the updated game-board
+                draw_interface(score, delta)
+                pygame.display.update()
+
+
 # GAME SEQUENCE:
 
 # Draw intro screen firstly
 draw_intro_screen()
-
-# Draw initial game-board once intro is passed
-score = 0
-draw_interface(score)
-pygame.display.update()
-
-# Main game-cycle
-while is_zero_in_mas(mas) or can_move(mas):
-    for event in pygame.event.get():
-        # Close action handling
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit(0)
-        elif event.type == pygame.KEYDOWN:
-            delta = 0
-
-            # Keys handling
-            if event.key == pygame.K_LEFT:
-                mas, delta = move_left(mas)
-            elif event.key == pygame.K_RIGHT:
-                mas, delta = move_right(mas)
-            elif event.key == pygame.K_UP:
-                mas, delta = move_up(mas)
-            elif event.key == pygame.K_DOWN:
-                mas, delta = move_down(mas)
-            score += delta
-
-            # Actions once key is pressed
-            if is_zero_in_mas(mas):
-                zeros = get_empty_list(mas)
-                random.shuffle(zeros)
-                random_zero_number = zeros.pop()
-                x, y = get_index_from_number(random_zero_number)
-                mas = insert_2(mas, x, y)
-
-            # Re-drawing of the updated game-board
-            draw_interface(score, delta)
-            pygame.display.update()
-
+# Main loop
+game_sequence()
 # Display game-over screen once the main loop is finished
 draw_game_over()
