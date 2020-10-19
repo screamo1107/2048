@@ -115,7 +115,10 @@ def draw_game_over():
     font_end = pygame.font.SysFont(c.END_FONT, c.END_SIZE)
     text_end = font_end.render("GAME OVER.", True, c.COLORS['WHITE'])
     text_score = font_end.render(f"Your score: {score}", True, c.COLORS['WHITE'])
-    best_score = GAMERS_DATA[0][1]
+    if not GAMERS_DATA:
+        best_score = 0
+    else:
+        best_score = GAMERS_DATA[0][1]
     if score > best_score:
         text_b = "New record!"
     else:
@@ -129,9 +132,9 @@ def draw_game_over():
                 pygame.quit()
                 sys.exit(0)
         screen.fill(c.COLORS['BLACK'])
-        screen.blit(text_end, (85, 230))
-        screen.blit(text_score, (50, 300))
-        screen.blit(text_best, (110, 370))
+        screen.blit(text_end, (85, 200))
+        screen.blit(text_score, (50, 270))
+        screen.blit(text_best, (110, 340))
         pygame.display.update()
 
 
